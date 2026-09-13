@@ -203,113 +203,351 @@
     }
   ];
 
-  // أدوات إضافية: القوالب المرخّصة لا تحتوي على بنود الاختبارات الأصلية أو مفاتيح التصحيح.
-  // تسجل الأخصائية النتائج التي حصلت عليها من النسخة القانونية/المرخّصة من الأداة.
+  // الأدوات التالية بُنيت بعد مراجعة مصادر الناشرين/الجهات الرسمية والمراجع الأكاديمية المتاحة.
+  // لا تُعاد هنا كتابة بنود الاختبارات التجارية أو جداول التحويل المعيارية المحمية؛ بل تُسجل نتائج البروتوكول المرخّص بتفصيل منظم.
   testCatalog.push(
     {
-      id:'abuHasibaLanguage',mode:'licensed',title:'اختبار اللغة — أحمد أبو حسيبة',age:'وفق دليل النسخة المستخدمة',duration:'حسب دليل التطبيق',direction:'skill',
-      description:'قالب لتسجيل نتائج اختبار اللغة المستخدم لدى الأخصائية. لا يتضمن بنود المقياس أو جداول التحويل؛ أدخلي النتائج من النسخة الأصلية/المرخّصة.',
-      licenseNote:'يُستخدم هذا القالب لتوثيق النتائج فقط. يجب الرجوع إلى دليل الاختبار والنسخة القانونية التي لدى الأخصائية للتطبيق والتصحيح والتفسير.',
+      id:'abuHasibaLanguage',mode:'licensed',title:'مقياس اللغة المعرب — د. أحمد أبو حسيبة (Modified PLS-4)',
+      age:'تقارير بحثية مصرية: من 2 شهر حتى 7 سنوات و5 أشهر',duration:'تقريبًا 20–45 دقيقة بحسب العمر والتعاون',direction:'skill',
+      description:'وحدة تفصيلية لتوثيق تطبيق النسخة العربية المعدّلة من PLS-4، مع الاستقبال والتعبير والدرجة الكلية والمقاييس المساندة. لا تحتوي على نصوص البنود أو جداول التحويل.',
+      licenseNote:'طبّقي البنود وحددي نقطة البدء/القاعدة/السقف واشتقي الدرجات من دليل النسخة العربية التي بحوزتك. النظام يوثق النتائج فقط ولا يستبدل جداول التقنين.',
+      facts:[
+        ['الأصل','تعريب/تعديل لـ Preschool Language Scale–4 (PLS-4)'],
+        ['المجالات الأساسية','الفهم/الاستقبال السمعي + التواصل/التعبير اللفظي'],
+        ['البنية المنشورة عربيًا','تذكر مصادر تدريبية 62 بندًا استقباليًا و71 بندًا تعبيريًا؛ تحققي من إصدارك قبل التطبيق'],
+        ['الدرجات المحتملة','Raw score، Standard/Derived score، Percentile، Language-age equivalent، Total Language'],
+        ['مقاييس مساندة في PLS-4','استبيان مقدم الرعاية، فحص النطق، وعينة اللغة بحسب الإصدار'],
+        ['القاعدة/السقف','مصادر عربية ثانوية تصف قاعدة 3 إجابات صحيحة متتالية وسقف 5 أخطاء متتالية؛ المرجع الحاكم هو دليل نسختك']
+      ],
+      sources:[
+        {title:'Pearson — PLS-4 product information',url:'https://www.pearsonclinical.asia/zh-sg/Store/Professional-Assessments/Speech-%26-Language/Preschool-Language-Scale-%7CFourth-Edition/p/P100015133'},
+        {title:'Academic review of Arabic language assessments (Modified PLS-4 in Egypt)',url:'https://pure.plymouth.ac.uk/ws/portalfiles/portal/53605464/manuscript-combined_1_.pdf'}
+      ],
       fields:[
-        {id:'version',label:'اسم/إصدار النسخة المستخدمة'},{id:'receptiveRaw',label:'درجة اللغة الاستقبالية كما وردت في البروتوكول'},{id:'receptiveDerived',label:'الدرجة المشتقة/العمر اللغوي الاستقبالي إن كان متاحًا'},{id:'expressiveRaw',label:'درجة اللغة التعبيرية كما وردت في البروتوكول'},{id:'expressiveDerived',label:'الدرجة المشتقة/العمر اللغوي التعبيري إن كان متاحًا'},{id:'totalScore',label:'الدرجة الكلية/المركبة كما وردت في التقرير'},{id:'classification',label:'التصنيف وفق دليل الاختبار'},{id:'subscaleSummary',label:'ملخص النتائج ومواطن القوة والضعف',type:'textarea'}
+        {group:'بيانات التطبيق',id:'version',label:'الإصدار/النسخة العربية المستخدمة'},
+        {group:'بيانات التطبيق',id:'chronologicalAge',label:'العمر الزمني وقت التطبيق'},
+        {group:'بيانات التطبيق',id:'startReceptive',label:'رقم نقطة البدء — الاستقبالي',type:'number',min:'0'},
+        {group:'بيانات التطبيق',id:'startExpressive',label:'رقم نقطة البدء — التعبيري',type:'number',min:'0'},
+        {group:'بيانات التطبيق',id:'basalNotes',label:'توثيق القاعدة Basal',type:'textarea',help:'اكتبي البند الذي ثبتت عنده القاعدة وكيف تم التحقق منها وفق دليل نسختك.'},
+        {group:'بيانات التطبيق',id:'ceilingNotes',label:'توثيق السقف Ceiling',type:'textarea'},
+        {group:'اللغة الاستقبالية / Auditory Comprehension',id:'receptiveRaw',label:'Raw score الاستقبالي',type:'number',min:'0'},
+        {group:'اللغة الاستقبالية / Auditory Comprehension',id:'receptiveStandard',label:'Standard/Derived score الاستقبالي',type:'number'},
+        {group:'اللغة الاستقبالية / Auditory Comprehension',id:'receptivePercentile',label:'Percentile rank الاستقبالي',type:'number',min:'0',max:'100'},
+        {group:'اللغة الاستقبالية / Auditory Comprehension',id:'receptiveAgeEq',label:'العمر اللغوي المكافئ — الاستقبالي'},
+        {group:'اللغة التعبيرية / Expressive Communication',id:'expressiveRaw',label:'Raw score التعبيري',type:'number',min:'0'},
+        {group:'اللغة التعبيرية / Expressive Communication',id:'expressiveStandard',label:'Standard/Derived score التعبيري',type:'number'},
+        {group:'اللغة التعبيرية / Expressive Communication',id:'expressivePercentile',label:'Percentile rank التعبيري',type:'number',min:'0',max:'100'},
+        {group:'اللغة التعبيرية / Expressive Communication',id:'expressiveAgeEq',label:'العمر اللغوي المكافئ — التعبيري'},
+        {group:'الدرجة الكلية',id:'totalLanguageScore',label:'Total Language score'},
+        {group:'الدرجة الكلية',id:'totalPercentile',label:'Percentile الكلي',type:'number',min:'0',max:'100'},
+        {group:'الدرجة الكلية',id:'totalAgeEq',label:'العمر اللغوي الكلي/المكافئ إن كان صادرًا عن النسخة'},
+        {group:'الدرجة الكلية',id:'classification',label:'التفسير/التصنيف كما ورد في الدليل'},
+        {group:'مقاييس مساندة',id:'caregiverQuestionnaire',label:'ملخص استبيان مقدم الرعاية',type:'textarea'},
+        {group:'مقاييس مساندة',id:'articulationScreen',label:'نتيجة فحص النطق/Articulation screener',type:'textarea'},
+        {group:'مقاييس مساندة',id:'languageSample',label:'ملخص عينة اللغة',type:'textarea'},
+        {group:'الخطة',id:'strengthsWeaknesses',label:'مواطن القوة والضعف اللغوي',type:'textarea'}
       ]
     },
     {
-      id:'nahlaRifaiLanguage',mode:'licensed',title:'اختبار اللغة — د. نهلة الرفاعي',age:'وفق دليل الاختبار',duration:'حسب دليل التطبيق',direction:'skill',
-      description:'قالب توثيق لنتائج اختبار اللغة لد. نهلة الرفاعي من النسخة التي تطبقها الأخصائية؛ لا يحتوي على البنود الأصلية أو قواعد التصحيح.',
-      licenseNote:'أدخلي الدرجات والتفسير الناتج من النسخة الأصلية التي تستخدمينها. لا يحسب النظام درجة معيارية من تلقاء نفسه.',
+      id:'nahlaRifaiLanguage',mode:'licensed',title:'اختبار اللغة العربي المطور — د. نهلة الرفاعي',
+      age:'تصفه مراجع عربية بأنه يغطي تقريبًا 2–7 سنوات؛ تحققي من الإصدار المستخدم',duration:'حسب العمر وتعاون الطفل والإصدار',direction:'skill',
+      description:'وحدة توثيق مفصلة للمحاور المنشورة لاختبار اللغة لد. نهلة الرفاعي: الانتباه والتقليد واللغة الاستقبالية والتعبيرية والدلالة والبراجماتية والإطار اللحني والفونولوجيا.',
+      licenseNote:'المصادر العامة المتاحة ليست ناشرًا رسميًا موحدًا للاختبار، وبعض الإصدارات/الاستمارات تختلف. لذلك لا يقوم النظام باشتقاق العمر اللغوي أو التصنيف دون قيم النسخة التي تستخدمينها.',
+      facts:[
+        ['الغرض','توصيف مستوى اللغة وبناء خطة التأهيل ومتابعة التغير عبر الزمن'],
+        ['مجالات متكررة في الاستمارات المنشورة','الانتباه، التقليد، الذاكرة السمعية، الاستقبالي، التعبيري، الدلالة، البراجماتية، الإطار اللحني/Prosody، الفونولوجيا'],
+        ['مخرجات متداولة','درجات المجالات + أعمار لغوية فرعية + عمر لغوي كلي، وفق استمارة/إصدار الأخصائية'],
+        ['طريقة الاستخدام','يفضل الاحتفاظ بتاريخ كل تطبيق للمقارنة الطولية وعدم خلط نتائج إصدارات مختلفة']
+      ],
+      sources:[
+        {title:'Academic paper using Nahla El-Rifai language test',url:'https://cpc.journals.ekb.eg/article_239461_f2d49ac9b72459bf31dba615202179d6.pdf'},
+        {title:'Publicly available scoring-form description (secondary source)',url:'https://disa-help.com/2020/09/%D8%A3%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1-%D8%A7%D9%84%D9%84%D8%BA%D8%A9-%D9%84%D9%84%D8%AF%D9%83%D8%AA%D9%88%D8%B1%D8%A9-%D9%86%D9%87%D9%84%D8%A9-%D8%A7%D9%84%D8%B1%D9%81%D8%A7%D8%B9%D9%8A/'}
+      ],
       fields:[
-        {id:'version',label:'الإصدار/النموذج المستخدم'},{id:'receptiveScore',label:'نتيجة اللغة الاستقبالية'},{id:'expressiveScore',label:'نتيجة اللغة التعبيرية'},{id:'overallScore',label:'النتيجة الكلية'},{id:'languageLevel',label:'المستوى/العمر اللغوي الناتج إن وجد'},{id:'classification',label:'التصنيف وفق دليل الاختبار'},{id:'subscaleSummary',label:'تفاصيل المجالات كما وردت في استمارة الاختبار',type:'textarea'}
+        {group:'بيانات التطبيق',id:'version',label:'اسم الإصدار/الاستمارة المستخدمة'},
+        {group:'بيانات التطبيق',id:'chronologicalAge',label:'العمر الزمني'},
+        {group:'بيانات التطبيق',id:'administrationNo',label:'رقم المتابعة/التطبيق',type:'select',options:['الأول','الثاني','الثالث','متابعة أخرى']},
+        {group:'المهارات الداعمة',id:'attentionScore',label:'درجة الانتباه من الاستمارة الأصلية'},
+        {group:'المهارات الداعمة',id:'imitationScore',label:'درجة التقليد'},
+        {group:'المهارات الداعمة',id:'auditoryMemoryScore',label:'درجة الذاكرة السمعية/مدى الذاكرة'},
+        {group:'اللغة الاستقبالية',id:'receptiveScore',label:'درجة اللغة الاستقبالية'},
+        {group:'اللغة الاستقبالية',id:'receptiveAge',label:'العمر اللغوي الاستقبالي'},
+        {group:'اللغة التعبيرية',id:'expressiveScore',label:'درجة اللغة التعبيرية'},
+        {group:'اللغة التعبيرية',id:'expressiveAge',label:'العمر اللغوي التعبيري'},
+        {group:'المستويات اللغوية',id:'semanticsScore',label:'Semantics / الدلالة — الدرجة'},
+        {group:'المستويات اللغوية',id:'semanticsAge',label:'العمر الدلالي إن كان محسوبًا'},
+        {group:'المستويات اللغوية',id:'pragmaticsScore',label:'Pragmatics / البراجماتية — الدرجة'},
+        {group:'المستويات اللغوية',id:'pragmaticsAge',label:'العمر البراجماتي إن كان محسوبًا'},
+        {group:'المستويات اللغوية',id:'prosodyScore',label:'Prosody / الإطار اللحني — الدرجة'},
+        {group:'المستويات اللغوية',id:'prosodyAge',label:'العمر الخاص بالإطار اللحني إن كان محسوبًا'},
+        {group:'المستويات اللغوية',id:'phonologyScore',label:'Phonology / الفونولوجيا — الدرجة'},
+        {group:'المحصلة',id:'overallScore',label:'النتيجة الكلية وفق الاستمارة'},
+        {group:'المحصلة',id:'overallLanguageAge',label:'العمر اللغوي الكلي'},
+        {group:'المحصلة',id:'classification',label:'التفسير/المستوى حسب النسخة المستخدمة'},
+        {group:'الخطة',id:'priorityTargets',label:'البنود/المهارات ذات الأولوية في الخطة',type:'textarea'},
+        {group:'الخطة',id:'comparisonToPrevious',label:'مقارنة بالتطبيق السابق',type:'textarea'}
       ]
     },
     {
-      id:'conners',mode:'licensed',title:'Conners — تسجيل نتائج النسخة المرخّصة',age:'بحسب إصدار Conners المستخدم',duration:'بحسب النموذج',direction:'risk',
-      sourceTitle:'Pearson Clinical Assessments — Conners',sourceUrl:'https://www.pearson.com/en-us/work/clinical-assessments/neurodevelopment-behavior',
-      description:'لتوثيق نتائج Conners الخاصة بالانتباه وفرط الحركة من التقرير/البروتوكول المرخّص، دون إعادة إنتاج البنود أو مفاتيح التصحيح.',
-      licenseNote:'استخدمي النموذج المناسب للعمر والمجيب، ثم أدخلي T-scores/النتائج والتفسير كما خرجت من النظام الرسمي أو الدليل.',
+      id:'conners',mode:'licensed',title:'Conners 4™ — ملف نتائج تفصيلي',
+      age:'Parent/Teacher: 6–18 سنة • Self-report: 8–18 سنة',duration:'Full 12–15 د • Short 5–7 د • ADHD Index 1–1.5 د',direction:'risk',
+      description:'تسجيل منظم لكل أقسام تقرير Conners 4 الرسمي: نوع النموذج والمجيب، صلاحية الاستجابة، Content Scales، DSM Symptom Scales، Functional Outcome/Impairment، ADHD Index والمؤشرات الحرجة.',
+      licenseNote:'Conners 4 يُصحح رقميًا عبر Q-global. أدخلي T-scores والنتائج من التقرير الرسمي؛ لا يحتوي النظام على البنود أو مفاتيح التصحيح.',
+      facts:[
+        ['الإصدار','Conners 4th Edition، 2022'],
+        ['المجيبون','Parent، Teacher، Self-report'],
+        ['الأطوال','Full 109–118 بندًا، Short 49–53، ADHD Index 12 بندًا'],
+        ['التصحيح','Digital only via Q-global'],
+        ['المخرجات','T-scores/percentiles، مقارنات معيارية وداخل الملف، ملخص تفسيري، مؤشرات استجابة ومؤشرات حرجة']
+      ],
+      sources:[
+        {title:'Pearson — Conners 4 product page',url:'https://www.pearsonassessments.com/store/en/usd/p/P100043000.html'},
+        {title:'Pearson Q-global — Conners 4 score entry / structure',url:'https://qglobal.pearsonclinical.com/qg/static/Product/da/Conners-4/Conners-4_Enter_Scores.htm'}
+      ],
       fields:[
-        {id:'version',label:'الإصدار والنموذج'},{id:'respondent',label:'المجيب: والد/معلم/ذاتي/غيره'},{id:'validity',label:'مؤشرات صلاحية الاستجابة كما وردت في التقرير'},{id:'scoreSummary',label:'الدرجات المعيارية/T-scores للمقاييس ذات الصلة',type:'textarea'},{id:'highestScore',label:'أعلى درجة/مؤشر يحتاج انتباهًا'},{id:'classification',label:'التفسير وفق التقرير الرسمي'},{id:'functionalImpact',label:'الأثر الوظيفي الملحوظ',type:'textarea'}
+        {group:'الإدارة والنموذج',id:'formLength',label:'طول النموذج',type:'select',options:['Full length','Short','ADHD Index']},
+        {group:'الإدارة والنموذج',id:'respondent',label:'المجيب',type:'select',options:['Parent / ولي أمر','Teacher / معلم','Self-report / ذاتي']},
+        {group:'الإدارة والنموذج',id:'language',label:'لغة النموذج'},
+        {group:'الإدارة والنموذج',id:'referenceSample',label:'Principal reference sample المستخدم في التقرير'},
+        {group:'صلاحية/جودة الاستجابة',id:'responseStyle',label:'Response Style Analysis — الملخص',type:'textarea'},
+        {group:'صلاحية/جودة الاستجابة',id:'inconsistencyIndex',label:'Inconsistency Index كما ورد'},
+        {group:'صلاحية/جودة الاستجابة',id:'omittedItems',label:'عدد/ملاحظة البنود المتروكة'},
+        {group:'Content Scales — T scores',id:'tInattentionExecutive',label:'Inattention / Executive Dysfunction — T',type:'number'},
+        {group:'Content Scales — T scores',id:'tHyperactivity',label:'Hyperactivity — T',type:'number'},
+        {group:'Content Scales — T scores',id:'tImpulsivity',label:'Impulsivity — T',type:'number'},
+        {group:'Content Scales — T scores',id:'tEmotionalDysregulation',label:'Emotional Dysregulation — T',type:'number'},
+        {group:'Content Scales — T scores',id:'tDepressedMood',label:'Depressed Mood — T',type:'number'},
+        {group:'Content Scales — T scores',id:'tAnxiousThoughts',label:'Anxious Thoughts — T',type:'number'},
+        {group:'DSM Symptom Scales',id:'tAdhdInattentive',label:'ADHD Inattentive Symptoms — T/نتيجة التقرير'},
+        {group:'DSM Symptom Scales',id:'tAdhdHyperImpulsive',label:'ADHD Hyperactive/Impulsive Symptoms — T/نتيجة التقرير'},
+        {group:'DSM Symptom Scales',id:'tTotalAdhd',label:'Total ADHD Symptoms — T/نتيجة التقرير'},
+        {group:'DSM Symptom Scales',id:'tOdd',label:'Oppositional Defiant Disorder Symptoms — T/نتيجة التقرير'},
+        {group:'DSM Symptom Scales',id:'tConduct',label:'Conduct Disorder Symptoms — T/نتيجة التقرير (إن تم تطبيقه)'},
+        {group:'Impairment / Functional Outcome',id:'schoolwork',label:'Schoolwork — T/النتيجة'},
+        {group:'Impairment / Functional Outcome',id:'peerInteractions',label:'Peer Interactions — T/النتيجة'},
+        {group:'Impairment / Functional Outcome',id:'familyLife',label:'Family Life — T/النتيجة'},
+        {group:'ADHD Index',id:'adhdIndexResult',label:'Conners 4 ADHD Index — النتيجة/الاحتمال كما ورد في Q-global'},
+        {group:'Critical & Indicator Items',id:'severeConductCritical',label:'Severe Conduct Critical Items — متابعة مطلوبة؟',type:'textarea'},
+        {group:'Critical & Indicator Items',id:'selfHarmCritical',label:'Self-Harm Critical Items — متابعة مطلوبة؟',type:'textarea',help:'إذا وُجدت إشارة للخطر، يلزم التقييم السريري الفوري وفق بروتوكول المنشأة.'},
+        {group:'Critical & Indicator Items',id:'sleepIndicator',label:'Sleep Problems Indicator — الملخص',type:'textarea'},
+        {group:'الخلاصة',id:'officialInterpretation',label:'التفسير الرسمي/أهم الارتفاعات',type:'textarea'},
+        {group:'الخلاصة',id:'multiInformantComparison',label:'مقارنة Parent/Teacher/Self إن وُجدت',type:'textarea'}
       ]
     },
     {
-      id:'gars3',mode:'licensed',title:'GARS — Gilliam Autism Rating Scale',age:'وفق الإصدار المستخدم',duration:'حسب الدليل',direction:'risk',
-      sourceTitle:'WPS — Autism Assessments',sourceUrl:'https://www.wpspublish.com/autism-assessments',
-      description:'قالب لتسجيل نتائج GARS من النسخة المرخّصة، بما فيها الدرجة/المؤشر والتفسير الناتج، دون نسخ بنود المقياس.',
-      licenseNote:'طبّقي وصححي المقياس من المواد الرسمية ثم انقلي الملخص هنا لحفظه في ملف الحالة.',
+      id:'gars3',mode:'licensed',title:'GARS-3 — Gilliam Autism Rating Scale, Third Edition',
+      age:'3–22 سنة',duration:'5–10 دقائق',direction:'risk',
+      description:'ملف نتائج تفصيلي للمقاييس الستة، Autism Index، Percentile، Severity وProbability كما تخرج من البروتوكول الرسمي.',
+      licenseNote:'GARS-3 أداة محمية ومؤهلات استخدامها Level B. أدخلي الدرجات المحسوبة من Summary/Response Booklet أو النظام الرسمي؛ لا تُنسخ البنود الـ56 هنا.',
+      facts:[
+        ['المؤلف','James E. Gilliam'],['الإصدار','Third Edition، 2013'],['عدد البنود','56 بندًا في 6 مقاييس فرعية'],
+        ['المقاييس','Restricted/Repetitive Behaviors، Social Interaction، Social Communication، Emotional Responses، Cognitive Style، Maladaptive Speech'],
+        ['المخرجات','Standard scores، Percentile ranks، Severity level، Probability of autism'],['التطبيق','ورقي/يدوي؛ معلومات من الوالد/المعلم/المختص حسب الحالة']
+      ],
+      sources:[{title:'Pearson — GARS-3 official product page',url:'https://www.pearsonassessments.com/en-us/Store/Professional-Assessments/Behavior/Gilliam-Autism-Rating-Scale-%7C-Third-Edition/p/100000802'}],
       fields:[
-        {id:'version',label:'الإصدار المستخدم (مثال: GARS-3)'},{id:'respondent',label:'المجيب/مصدر المعلومات'},{id:'subscaleSummary',label:'ملخص درجات المقاييس الفرعية كما وردت في البروتوكول',type:'textarea'},{id:'autismIndex',label:'Autism Index / المؤشر الناتج'},{id:'classification',label:'التفسير/التصنيف وفق الدليل'},{id:'clinicalContext',label:'ملاحظات سريرية داعمة',type:'textarea'}
+        {group:'بيانات التطبيق',id:'respondent',label:'المجيب/مصدر المعلومات'},
+        {group:'بيانات التطبيق',id:'verbalStatus',label:'الحالة اللفظية/النموذج المستخدم'},
+        {group:'المقاييس الفرعية',id:'rrbRaw',label:'Restricted/Repetitive Behaviors — Raw'},
+        {group:'المقاييس الفرعية',id:'rrbScaled',label:'Restricted/Repetitive Behaviors — Scaled/Standard'},
+        {group:'المقاييس الفرعية',id:'socialInteractionRaw',label:'Social Interaction — Raw'},
+        {group:'المقاييس الفرعية',id:'socialInteractionScaled',label:'Social Interaction — Scaled/Standard'},
+        {group:'المقاييس الفرعية',id:'socialCommunicationRaw',label:'Social Communication — Raw'},
+        {group:'المقاييس الفرعية',id:'socialCommunicationScaled',label:'Social Communication — Scaled/Standard'},
+        {group:'المقاييس الفرعية',id:'emotionalResponsesRaw',label:'Emotional Responses — Raw'},
+        {group:'المقاييس الفرعية',id:'emotionalResponsesScaled',label:'Emotional Responses — Scaled/Standard'},
+        {group:'المقاييس الفرعية',id:'cognitiveStyleRaw',label:'Cognitive Style — Raw (إذا كان مطبقًا)'},
+        {group:'المقاييس الفرعية',id:'cognitiveStyleScaled',label:'Cognitive Style — Scaled/Standard'},
+        {group:'المقاييس الفرعية',id:'maladaptiveSpeechRaw',label:'Maladaptive Speech — Raw (إذا كان مطبقًا)'},
+        {group:'المقاييس الفرعية',id:'maladaptiveSpeechScaled',label:'Maladaptive Speech — Scaled/Standard'},
+        {group:'النتيجة المركبة',id:'autismIndex',label:'Autism Index'},
+        {group:'النتيجة المركبة',id:'percentileRank',label:'Percentile Rank'},
+        {group:'النتيجة المركبة',id:'severityLevel',label:'Severity Level'},
+        {group:'النتيجة المركبة',id:'probability',label:'Probability of Autism كما وردت في الدليل'},
+        {group:'التكامل التشخيصي',id:'dsm5Validation',label:'Diagnostic Validation Form / توافق DSM-5 — الملخص',type:'textarea'},
+        {group:'التكامل التشخيصي',id:'clinicalContext',label:'ملاحظات سريرية ومصادر معلومات إضافية',type:'textarea'}
       ]
     },
     {
-      id:'cars2',mode:'licensed',title:'CARS — Childhood Autism Rating Scale',age:'وفق إصدار CARS المستخدم',duration:'حسب الدليل',direction:'risk',
-      sourceTitle:'WPS — CARS-2 ضمن Autism Assessments',sourceUrl:'https://www.wpspublish.com/autism-assessments',
-      description:'قالب لتسجيل الدرجة الكلية والتصنيف من CARS/CARS-2 المرخّص دون تضمين عناصر المقياس المحمية.',
-      licenseNote:'استخدمي نموذج CARS المناسب للحالة من المصدر الرسمي ثم سجلي الدرجة والتصنيف هنا.',
+      id:'cars2',mode:'licensed',title:'CARS-2 — Childhood Autism Rating Scale, Second Edition',
+      age:'2 سنوات فأكثر',duration:'حوالي 15 دقيقة • 15 بندًا',direction:'risk',
+      description:'تسجيل نموذج CARS2-ST أو CARS2-HF مع 15 خانة درجة، مجموع تلقائي داخل الشاشة، والتصنيف الذي تنقله الأخصائية من الدليل الرسمي.',
+      licenseNote:'النظام لا يعرض عناوين البنود ولا حدود التصنيف المعيارية. أدخلي درجة كل بند من Record Booklet الأصلي، ثم انقلي التصنيف من الدليل.',
+      facts:[
+        ['النماذج','CARS2-ST للسن الأصغر/صعوبات التواصل أو الأداء المعرفي المنخفض؛ CARS2-HF للمتحدثين بطلاقة من 6+ مع IQ أعلى من 80'],
+        ['عدد البنود','15'],['استبيان الأسرة','Questionnaire for Parents or Caregivers غير مصحح، ويستخدم كمصدر معلومات للتقدير'],
+        ['الهدف','دمج معلومات تشخيصية، تحديد القدرات الوظيفية، دعم التخطيط للتدخل']
+      ],
+      sources:[{title:'Pearson — CARS2 official product page',url:'https://www.pearsonassessments.com/en-us/Store/Professional-Assessments/Behavior/Childhood-Autism-Rating-Scale-%7C-Second-Edition/p/100000164'}],
+      calculations:[{id:'carsEnteredTotal',label:'مجموع الدرجات المدخلة (للمراجعة فقط)',sumPrefix:'carsItem'}],
       fields:[
-        {id:'version',label:'الإصدار/النموذج المستخدم'},{id:'informationSources',label:'مصادر التقييم: ملاحظة/والد/ملفات/غيره'},{id:'totalScore',label:'الدرجة الكلية كما وردت في البروتوكول'},{id:'classification',label:'التصنيف وفق دليل المقياس'},{id:'profileNotes',label:'ملخص الملامح السريرية المهمة',type:'textarea'}
+        {group:'بيانات التطبيق',id:'formType',label:'النموذج',type:'select',options:['CARS2-ST — Standard Version','CARS2-HF — High-Functioning Version']},
+        {group:'بيانات التطبيق',id:'informationSources',label:'مصادر المعلومات/الملاحظة',type:'textarea'},
+        {group:'درجات البنود من البروتوكول الأصلي',id:'carsItem1',label:'البند 1 — الدرجة من Record Booklet',type:'number',min:'1',max:'4',step:'0.5'},
+        {group:'درجات البنود من البروتوكول الأصلي',id:'carsItem2',label:'البند 2 — الدرجة',type:'number',min:'1',max:'4',step:'0.5'},
+        {group:'درجات البنود من البروتوكول الأصلي',id:'carsItem3',label:'البند 3 — الدرجة',type:'number',min:'1',max:'4',step:'0.5'},
+        {group:'درجات البنود من البروتوكول الأصلي',id:'carsItem4',label:'البند 4 — الدرجة',type:'number',min:'1',max:'4',step:'0.5'},
+        {group:'درجات البنود من البروتوكول الأصلي',id:'carsItem5',label:'البند 5 — الدرجة',type:'number',min:'1',max:'4',step:'0.5'},
+        {group:'درجات البنود من البروتوكول الأصلي',id:'carsItem6',label:'البند 6 — الدرجة',type:'number',min:'1',max:'4',step:'0.5'},
+        {group:'درجات البنود من البروتوكول الأصلي',id:'carsItem7',label:'البند 7 — الدرجة',type:'number',min:'1',max:'4',step:'0.5'},
+        {group:'درجات البنود من البروتوكول الأصلي',id:'carsItem8',label:'البند 8 — الدرجة',type:'number',min:'1',max:'4',step:'0.5'},
+        {group:'درجات البنود من البروتوكول الأصلي',id:'carsItem9',label:'البند 9 — الدرجة',type:'number',min:'1',max:'4',step:'0.5'},
+        {group:'درجات البنود من البروتوكول الأصلي',id:'carsItem10',label:'البند 10 — الدرجة',type:'number',min:'1',max:'4',step:'0.5'},
+        {group:'درجات البنود من البروتوكول الأصلي',id:'carsItem11',label:'البند 11 — الدرجة',type:'number',min:'1',max:'4',step:'0.5'},
+        {group:'درجات البنود من البروتوكول الأصلي',id:'carsItem12',label:'البند 12 — الدرجة',type:'number',min:'1',max:'4',step:'0.5'},
+        {group:'درجات البنود من البروتوكول الأصلي',id:'carsItem13',label:'البند 13 — الدرجة',type:'number',min:'1',max:'4',step:'0.5'},
+        {group:'درجات البنود من البروتوكول الأصلي',id:'carsItem14',label:'البند 14 — الدرجة',type:'number',min:'1',max:'4',step:'0.5'},
+        {group:'درجات البنود من البروتوكول الأصلي',id:'carsItem15',label:'البند 15 — الدرجة',type:'number',min:'1',max:'4',step:'0.5'},
+        {group:'النتيجة الرسمية',id:'officialTotalScore',label:'Total Score كما سجل في البروتوكول'},
+        {group:'النتيجة الرسمية',id:'tScorePercentile',label:'T-score / Percentile إن كان ظاهرًا في تقريرك'},
+        {group:'النتيجة الرسمية',id:'classification',label:'التصنيف الرسمي حسب النموذج والدليل'},
+        {group:'النتيجة الرسمية',id:'profileNotes',label:'ملخص الملامح السريرية',type:'textarea'}
       ]
     },
     {
-      id:'abllsR',mode:'licensed',title:'ABLLS-R — تسجيل نتائج البروتوكول المرخّص',age:'يركز خصوصًا على مهارات اللغة والتعلم المبكرة',duration:'تقييم ممتد',direction:'skill',
-      sourceTitle:'Partington Behavior Analysts — ABLLS-R',sourceUrl:'https://partingtonbehavioranalysts.com/products/ablls-r-the-assessment-of-basic-language-and-learning-skills-revised',
-      description:'لوحة توثيق لنتائج ABLLS-R من البروتوكول الأصلي؛ لا تتضمن مهام أو بنود ABLLS-R المحمية.',
-      licenseNote:'ABLLS-R محمي بحقوق النشر. استخدمي الـGuide والـProtocol الأصليين، ثم أدخلي هنا ملخص الملف المهاري والأهداف ذات الأولوية.',
+      id:'abllsR',mode:'licensed',title:'ABLLS-R® — Assessment of Basic Language and Learning Skills–Revised',
+      age:'مرجعي-محكي؛ يستخدم غالبًا مع مهارات ما قبل المدرسة/التأخر النمائي',duration:'تقييم موسع ومتكرر عبر الزمن',direction:'skill',
+      description:'لوحة ملف مهاري مفصلة متوافقة مع البنية الرسمية: 544 مهارة في 25 مجالًا (A–Z باستثناء O)، مع توثيق تاريخ كل بروتوكول، الأولويات، العوائق والأهداف.',
+      licenseNote:'ABLLS-R وWebABLLS محميان. لا يعرض النظام مهام الـ544 ولا معايير إتقانها. أدخلي ملخص/درجة كل Category من بروتوكولك المرخّص.',
+      facts:[
+        ['المؤلف','James W. Partington'],['البنية','544 مهارة في 25 skill areas / categories'],['الوظيفة','Assessment + Curriculum Guide + Skills Tracking System'],
+        ['المجالات الكبرى','Basic language & learner skills، Academic، Self-help، Motor'],['التقارير','Skills tracking grids، progress tracking، IEP/treatment goal development']
+      ],
+      sources:[
+        {title:'Partington Behavior Analysts / CentralReach — ABLLS-R official product',url:'https://partingtonbehavioranalysts.com/products/ablls-r-the-assessment-of-basic-language-and-learning-skills-revised'},
+        {title:'WebABLLS Support — official overview',url:'https://supportcenter.webablls.net/article/ablls-r-overview'}
+      ],
       fields:[
-        {id:'protocolDate',label:'تاريخ/إصدار البروتوكول'},{id:'domainsSummary',label:'ملخص المجالات والدرجات من البروتوكول',type:'textarea'},{id:'strengths',label:'المهارات الأقوى',type:'textarea'},{id:'prioritySkills',label:'المهارات ذات الأولوية للتعليم',type:'textarea'},{id:'iepTargets',label:'الأهداف المختارة للخطة/IEP',type:'textarea'}
+        {group:'بيانات البروتوكول',id:'protocolDate',label:'تاريخ البروتوكول/التقييم'},
+        {group:'بيانات البروتوكول',id:'serviceContext',label:'البرنامج/الخدمة الحالية'},
+        {group:'ملخص Categories A–Z (باستثناء O)',id:'catA',label:'Category A — النتيجة/نسبة الإتقان من البروتوكول'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catB',label:'Category B — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catC',label:'Category C — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catD',label:'Category D — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catE',label:'Category E — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catF',label:'Category F — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catG',label:'Category G — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catH',label:'Category H — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catI',label:'Category I — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catJ',label:'Category J — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catK',label:'Category K — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catL',label:'Category L — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catM',label:'Category M — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catN',label:'Category N — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catP',label:'Category P — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catQ',label:'Category Q — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catR',label:'Category R — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catS',label:'Category S — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catT',label:'Category T — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catU',label:'Category U — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catV',label:'Category V — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catW',label:'Category W — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catX',label:'Category X — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catY',label:'Category Y — النتيجة'},{group:'ملخص Categories A–Z (باستثناء O)',id:'catZ',label:'Category Z — النتيجة'},
+        {group:'تحليل البرنامج',id:'strengths',label:'المهارات الراسخة/نقاط القوة',type:'textarea'},
+        {group:'تحليل البرنامج',id:'barriers',label:'العوائق التي تمنع اكتساب مهارات جديدة',type:'textarea'},
+        {group:'تحليل البرنامج',id:'prioritySkills',label:'المهارات ذات الأولوية للتعليم',type:'textarea'},
+        {group:'تحليل البرنامج',id:'iepTargets',label:'أهداف IEP/الخطة العلاجية المختارة',type:'textarea'}
       ]
     },
     {
-      id:'vbMapp',mode:'licensed',title:'VB-MAPP — تسجيل نتائج البروتوكول المرخّص',age:'الأطفال ذوو احتياجات اللغة والتعلم',duration:'تقييم متعدد الأجزاء',direction:'skill',
-      sourceTitle:'AVB Press — Official VB-MAPP Publisher',sourceUrl:'https://avbpress.com/',
-      description:'قالب لتسجيل ملخص نتائج VB-MAPP من الـGuide والـProtocol الرسميين، دون إعادة إنتاج الـmilestones أو البنود.',
-      licenseNote:'استخدمي VB-MAPP Guide + Protocol الرسميين ثم أدخلي ملخص النتائج فقط داخل ملف الحالة.',
+      id:'vbMapp',mode:'licensed',title:'VB-MAPP® — Verbal Behavior Milestones Assessment and Placement Program',
+      age:'مستويات نمائية 0–18، 18–30، 30–48 شهرًا (وليس حدًا عمريًا تشخيصيًا)',duration:'تقييم متعدد الأجزاء',direction:'skill',
+      description:'ملف كامل لتوثيق الأجزاء الرسمية الأربعة الأساسية للقرار البرنامجي: Milestones، Barriers، Transition، Placement/IEP، مع مجالات Milestones المعروفة دون نسخ الـ170 milestone.',
+      licenseNote:'النسخة الإلكترونية المصرح بها رسميًا هي VB-MAPP App، والنسخة الورقية تتطلب Guide + Protocol. النظام هنا لا يعيد إنتاج milestones أو barriers أو transition items.',
+      facts:[
+        ['المؤلف','Mark L. Sundberg, PhD, BCBA-D'],['Milestones','170 milestone عبر 3 مستويات نمائية'],['Barriers','24 حاجزًا للتعلم واكتساب اللغة'],
+        ['Transition','18 مهارة/مقياس انتقال'],['Supporting skills','أكثر من 700 مهارة داعمة في البروتوكول الرسمي'],['النوع','Criterion-referenced؛ مبني على تحليل السلوك اللفظي']
+      ],
+      sources:[
+        {title:'AVB Press — official VB-MAPP publisher',url:'https://avbpress.com/'},
+        {title:'VB-MAPP authorized digital platform',url:'https://vbmappapp.com/'}
+      ],
       fields:[
-        {id:'protocolDate',label:'تاريخ/إصدار البروتوكول'},{id:'milestonesSummary',label:'Milestones — ملخص المستوى والنتائج',type:'textarea'},{id:'barriersSummary',label:'Barriers — ملخص العوائق المحددة',type:'textarea'},{id:'transitionSummary',label:'Transition — ملخص مؤشرات الانتقال',type:'textarea'},{id:'placementSummary',label:'Placement / أولويات البرنامج',type:'textarea'}
+        {group:'بيانات البروتوكول',id:'protocolDate',label:'تاريخ التطبيق/الإصدار'},
+        {group:'Milestones — المستويات',id:'level1Total',label:'Level 1 total (0–18 months developmental level)'},
+        {group:'Milestones — المستويات',id:'level2Total',label:'Level 2 total (18–30 months developmental level)'},
+        {group:'Milestones — المستويات',id:'level3Total',label:'Level 3 total (30–48 months developmental level)'},
+        {group:'Milestones — مجالات الملف',id:'mandProfile',label:'Mand — ملخص الدرجة/المستوى'},
+        {group:'Milestones — مجالات الملف',id:'tactProfile',label:'Tact — ملخص الدرجة/المستوى'},
+        {group:'Milestones — مجالات الملف',id:'listenerProfile',label:'Listener Responding — ملخص الدرجة/المستوى'},
+        {group:'Milestones — مجالات الملف',id:'visualPerceptualMTS',label:'Visual Perceptual / Matching-to-Sample — الملخص'},
+        {group:'Milestones — مجالات الملف',id:'independentPlay',label:'Independent Play — الملخص'},
+        {group:'Milestones — مجالات الملف',id:'socialPlay',label:'Social Behavior / Social Play — الملخص'},
+        {group:'Milestones — مجالات الملف',id:'motorImitation',label:'Motor Imitation — الملخص'},
+        {group:'Milestones — مجالات الملف',id:'echoic',label:'Echoic / EESA — الملخص'},
+        {group:'Milestones — مجالات الملف',id:'spontaneousVocal',label:'Spontaneous Vocal Behavior — الملخص'},
+        {group:'Milestones — مجالات الملف',id:'lrffc',label:'Listener Responding by Feature/Function/Class — الملخص'},
+        {group:'Milestones — مجالات الملف',id:'intraverbal',label:'Intraverbal — الملخص'},
+        {group:'Milestones — مجالات الملف',id:'classroomGroup',label:'Classroom Routines / Group Skills — الملخص'},
+        {group:'Milestones — مجالات الملف',id:'linguisticStructure',label:'Linguistic Structure — الملخص'},
+        {group:'Milestones — مجالات الملف',id:'earlyAcademics',label:'Early Academics (reading/writing/math as applicable) — الملخص'},
+        {group:'Barriers Assessment',id:'barriersTotal',label:'إجمالي/ملخص Barriers من البروتوكول'},
+        {group:'Barriers Assessment',id:'barriersPriority',label:'أعلى العوائق أولوية',type:'textarea'},
+        {group:'Transition Assessment',id:'transitionTotal',label:'إجمالي/ملخص Transition من البروتوكول'},
+        {group:'Transition Assessment',id:'transitionNotes',label:'مهارات الانتقال التي تحتاج دعمًا',type:'textarea'},
+        {group:'Placement & IEP',id:'placementRecommendation',label:'Placement recommendation / مستوى البرنامج',type:'textarea'},
+        {group:'Placement & IEP',id:'iepPriorities',label:'أولويات الأهداف/IEP',type:'textarea'}
       ]
     },
     {
-      id:'lovaasProgram',mode:'program',title:'متابعة برنامج Lovaas / ABA مكثف',age:'حسب الخطة الفردية',duration:'متابعة دورية',direction:'skill',
-      description:'متابعة داخلية أصلية لمهارات برنامج سلوكي مكثف. ليست نسخة من منهج أو بروتوكول Lovaas ولا بديلًا عن تدريب متخصص.',
+      id:'lovaasProgram',mode:'program',title:'Lovaas Model / Early Intensive Behavioral Intervention — متابعة تطبيق',
+      age:'يبدأ عادة في الطفولة المبكرة؛ المصادر الرسمية تذكر غالبًا 2–5 سنوات للبدء',duration:'برنامج مكثف فردي؛ الجرعة تحددها الخطة والفريق',direction:'skill',
+      description:'متابعة تطبيقية مبنية على السمات المنشورة لطريقة Lovaas/ABA: تعليم فردي، تعزيز إيجابي، تقليد، لغة، لعب اجتماعي، تعميم، ومشاركة الأسرة. ليست قائمة بروتوكول أصلية.',
+      facts:[
+        ['النموذج','ABA فردي مكثف ومتكامل'],['البدء','غالبًا في عمر مبكر؛ Lovaas Institute يذكر 2–5 سنوات كبدء شائع'],
+        ['الشدّة','قد تصل البرامج المكثفة في بعض النماذج إلى 35–40 ساعة أسبوعيًا، مع تفصيل الجرعة حسب الطفل'],['التركيز','التواصل، التقليد، اتباع التعليمات، اللعب/الأقران، الاستقلال والتعميم'],
+        ['الأسرة','التعاون وتدريب الوالدين جزء مهم من النموذج']
+      ],
+      sources:[
+        {title:'Lovaas Institute — official approach',url:'https://lovaas.com/lovaas-method/'},
+        {title:'What Works Clearinghouse — Lovaas Model evidence summary',url:'https://ies.ed.gov/ncee/wwc/EvidenceSnapshot/295'}
+      ],
       sections:[
-        {id:'readiness',title:'الاستعداد للتعلم',items:['يجلس ويشارك في نشاط قصير','يتبع روتين جلسة واضح','يستجيب للتعزيز المناسب','ينتقل بين الأنشطة بمساعدة مناسبة']},
-        {id:'imitation',title:'التقليد',items:['يقلد حركات كبرى','يقلد حركات دقيقة','يقلد أفعالًا بالأشياء','يقلد أصواتًا/مقاطع مناسبة لقدراته']},
-        {id:'communication',title:'التواصل واللغة',items:['يفهم تعليمات وظيفية','يطلب احتياجاته بوسيلة فعالة','يسمي/يعبر بما يتناسب مع مستواه','يستخدم مهارات التواصل عبر أشخاص وبيئات مختلفة']},
-        {id:'playSocial',title:'اللعب والمهارات الاجتماعية',items:['يلعب بالأشياء بصورة وظيفية','يشارك في لعب تبادلي','ينتظر دوره','يشارك مع طفل/شريك آخر']},
-        {id:'independence',title:'الاستقلال والتعميم',items:['ينجز مهارة مكتسبة مع تقليل المساعدة','ينقل المهارة إلى مكان جديد','يستخدم المهارة مع شخص جديد','يحافظ على المهارة عبر الوقت']}
+        {id:'learningReadiness',title:'الجاهزية والتعلم الفردي',items:['يشارك في فترات تعلم قصيرة منظمة','يستجيب للتعزيز المحدد له','يتحمل الانتقال بين العمل واللعب','يقل احتياجه للتلقين تدريجيًا']},
+        {id:'imitation',title:'التقليد',items:['يقلد حركات جسمية','يقلد أفعالًا بالأشياء','يقلد حركات دقيقة','يقلد أصواتًا/كلمات وفق قدرته']},
+        {id:'receptive',title:'الفهم واتباع التعليمات',items:['يتبع تعليمات بسيطة','يميز عناصر/أشخاص مألوفين','يتبع تعليمات أكثر تعقيدًا تدريجيًا','ينقل الاستجابة إلى مواقف طبيعية']},
+        {id:'communication',title:'التواصل واللغة',items:['يبادر بطلب وظيفي','يزداد مخزونه التعبيري','يجيب عن أسئلة مناسبة لمستواه','يستخدم جملًا/رسائل أكثر تعقيدًا عند القدرة']},
+        {id:'playPeers',title:'اللعب والأقران',items:['يلعب وظيفيًا بالأشياء','يشارك في لعب تبادلي','يتحمل قرب الأقران ويشاركهم','يبادر بتفاعل اجتماعي مناسب']},
+        {id:'generalization',title:'التعميم والاستقلال',items:['يؤدي المهارة مع أكثر من شخص','يؤديها في أكثر من مكان','يحافظ على المهارة عبر الوقت','يحتاج مساعدة أقل في البيئة الطبيعية']},
+        {id:'family',title:'تطبيق الأسرة',items:['الأسرة تعرف الأهداف الحالية','تطبق استراتيجيات متسقة','تسجل ملاحظات/بيانات مفيدة','تعمم المهارات في الروتين اليومي']}
       ]
     },
     {
-      id:'portageProgram',mode:'program',title:'متابعة برنامج Portage للتدخل المبكر',age:'مرحلة الطفولة المبكرة',duration:'متابعة منزلية/دورية',direction:'skill',
-      sourceTitle:'National Portage Association — What is Portage?',sourceUrl:'https://www.portage.org.uk/about/what-portage',
-      description:'متابعة تطورية أصلية لدعم العمل المنزلي والأسري، وليست إعادة إنتاج لقائمة Portage الأصلية.',
+      id:'portageProgram',mode:'program',title:'Portage Guide / Portage Home Learning — ملف متابعة',
+      age:'الطفولة المبكرة؛ الأدلة الكلاسيكية من الميلاد حتى نحو 5–6 سنوات',duration:'Baseline + متابعة دورية منزلية/تعليمية',direction:'skill',
+      description:'ملف متابعة تطوري منظم حسب مجالات Portage المعروفة: Infant Stimulation، Socialization، Language/Communication، Self-help، Cognition، Motor؛ دون نسخ قائمة الـChecklist الأصلية.',
+      facts:[
+        ['الوظيفة','تقييم نمائي + تخطيط أهداف + تعليم منزلي/أسري'],['المجالات التقليدية','Infant stimulation، Socialization، Language، Self-help، Cognition، Motor'],
+        ['المبدأ','تحديد ما أتقنه الطفل وما يُرجح أن يتعلمه تاليًا ثم صياغة أهداف صغيرة قابلة للتعليم'],['الإصدارات الحديثة','Portage Guide Online يستخدم developmental areas وsequences وفئات عمرية متعددة']
+      ],
+      sources:[
+        {title:'Portage Guide Online — official overview',url:'https://www.portageguide.com/login'},
+        {title:'National Portage Association — developmental areas in practice',url:'https://www.portage.org.uk/node/218'}
+      ],
       sections:[
-        {id:'social',title:'التنشئة والمشاركة الاجتماعية',items:['يشارك شخصًا مألوفًا في نشاط','يطلب المساعدة أو الاهتمام','يتبادل الدور في نشاط بسيط','يشارك في روتين أسري مناسب']},
-        {id:'language',title:'التواصل واللغة',items:['يفهم رسائل يومية مناسبة','يعبر عن رغباته بوسيلة واضحة','يستخدم كلمات/رموزًا/إشارات وظيفيًا','يزداد تنوع تواصله مع الأسرة']},
-        {id:'selfHelp',title:'الاعتماد على النفس',items:['يشارك في الأكل والشرب بما يناسب قدرته','يشارك في اللبس/الخلع','يتبع روتين نظافة بسيط','ينجز جزءًا من مهمة يومية باستقلال متزايد']},
-        {id:'cognition',title:'المعرفة وحل المشكلات',items:['يطابق أو يصنف أشياء بسيطة','يفهم علاقة سبب ونتيجة','يبحث عن شيء مخفي/مفقود','يحل مشكلة بسيطة أثناء اللعب']},
-        {id:'motor',title:'المهارات الحركية',items:['يستخدم اليدين في أنشطة دقيقة مناسبة','ينتقل ويتحرك بأمان وفق قدرته','ينسق العين واليد في مهمة بسيطة','يشارك في نشاط حركي مناسب']}
+        {id:'infant',title:'Infant Stimulation / التحفيز المبكر',items:['يستجيب للمثيرات الاجتماعية والحسية المناسبة','يزداد انتباهه للأشخاص والأشياء','يبادر بحركات/أصوات استجابة للمحيط','تظهر مهارات تأسيسية تساند المجالات اللاحقة']},
+        {id:'social',title:'Socialization / التفاعل الاجتماعي',items:['يشارك شخصًا مألوفًا في نشاط','يتبادل الدور','يشارك في روتين اجتماعي','يزداد تفاعله مع الأطفال/الأسرة']},
+        {id:'language',title:'Language & Communication / اللغة والتواصل',items:['يفهم رسائل يومية مناسبة','يعبر عن احتياجاته بوسيلة فعالة','يزداد تنوع المفردات/الرموز/الإشارات','يستخدم التواصل في سياقات مختلفة']},
+        {id:'selfHelp',title:'Self-help / الاعتماد على النفس',items:['يتقدم في الأكل والشرب','يتقدم في اللبس والخلع','يتقدم في النظافة/الحمام حسب العمر','ينجز روتينًا يوميًا باستقلال أكبر']},
+        {id:'cognition',title:'Cognition / المعرفة وحل المشكلات',items:['يطابق/يصنف حسب مستواه','يفهم علاقات السبب والنتيجة','يحل مشكلات بسيطة أثناء اللعب','يتعلم مهارة جديدة بخطوات أصغر']},
+        {id:'motor',title:'Motor / الحركي',items:['يتقدم في المهارات الحركية الكبرى','يتقدم في الحركات الدقيقة','يتحسن التنسيق البصري الحركي','يستخدم المهارات الحركية وظيفيًا']}
       ]
     },
     {
-      id:'teacchProgram',mode:'program',title:'متابعة Structured TEACCHing / TEACCH',age:'عبر مراحل عمرية مختلفة',duration:'متابعة بيئية ودورية',direction:'skill',
-      sourceTitle:'UNC TEACCH Autism Program',sourceUrl:'https://teacch.com/',
-      description:'قائمة متابعة أصلية لتنظيم البيئة والاستقلال والتواصل ضمن مبادئ التعليم المنظم؛ ليست مادة تدريب TEACCH الرسمية.',
+      id:'teacchProgram',mode:'program',title:'Structured TEACCHing / TEACCH — متابعة جودة التطبيق',
+      age:'عبر مراحل العمر وفق احتياجات الشخص',duration:'تقييم بيئي ومراجعة دورية',direction:'skill',
+      description:'متابعة مباشرة للعناصر الأربعة التي يحددها UNC TEACCH في Structured TEACCHing: التنظيم الفيزيائي، الجداول الفردية، أنظمة العمل/النشاط، وبنية المواد/الدعم البصري.',
+      facts:[
+        ['الجهة','UNC TEACCH Autism Program'],['المنهج','Structured TEACCHing — antecedent-based approach'],
+        ['العناصر الرسمية','Physical organization، Individualized schedules، Work/activity systems، Materials structure & visual supports'],
+        ['الهدف','زيادة الفهم والاستقلال والاستفادة من نقاط القوة والاهتمامات']
+      ],
+      sources:[
+        {title:'UNC TEACCH — Structured TEACCHing framework',url:'https://teacch.com/trainings/certification/'},
+        {title:'UNC TEACCH — assessment tools (PEP-3, TTAP, Structured Teaching Assessment)',url:'https://teacch.com/resources/assessment-tools/'}
+      ],
       sections:[
-        {id:'physical',title:'تنظيم البيئة',items:['المكان يوضح أين يبدأ النشاط وأين ينتهي','المثيرات غير الضرورية منخفضة قدر الإمكان','الأدوات المطلوبة متاحة ومنظمة','حدود مناطق العمل/الراحة مفهومة للمتعلم']},
-        {id:'schedule',title:'الجداول والدعم البصري',items:['يعرف ما النشاط الحالي وما التالي','يستفيد من جدول بصري مناسب لمستواه','يفهم إشارة الانتهاء/الانتقال','تقل المساعدة اللفظية مع استخدام الدعم البصري']},
-        {id:'workSystems',title:'نظام العمل والاستقلال',items:['يفهم ما المطلوب إنجازه','يفهم كمية العمل المطلوبة','يعرف متى ينتهي','يعرف ما الذي سيحدث بعد الانتهاء']},
-        {id:'independence',title:'الاستقلال والتعميم',items:['يبدأ مهمة مألوفة باستقلال متزايد','يكمل مهمة مع خفض المساعدة','ينقل المهارة لبيئة/شخص آخر','يطلب المساعدة بطريقة مناسبة عند الحاجة']}
+        {id:'physical',title:'Physical Organization / التنظيم الفيزيائي',items:['حدود مناطق العمل والراحة واضحة','المكان يقلل التشتت غير الضروري','الأدوات موضوعة في أماكن متوقعة','التنظيم يساعد الشخص على معرفة أين يقوم بكل نشاط']},
+        {id:'schedule',title:'Individualized Schedules / الجداول الفردية',items:['الجدول مناسب لمستوى الفهم','يوضح ما يحدث الآن وما سيحدث بعده','الشخص يرجع للجدول باستقلال متزايد','الجدول يدعم الانتقال ويقلل الاعتماد على التوجيه اللفظي']},
+        {id:'workSystem',title:'Work / Activity Systems / نظام العمل',items:['يعرف ما العمل المطلوب','يعرف كمية العمل المطلوبة','يعرف متى انتهى','يعرف ماذا سيحدث بعد الانتهاء']},
+        {id:'visualStructure',title:'Materials Structure & Visual Supports / بنية المواد والدعم البصري',items:['المهمة توضح بصريًا كيفية البدء','المواد منظمة لتوضيح التسلسل','المؤشرات البصرية توضح المطلوب دون شرح زائد','الدعم البصري يساعد على الاستقلال والتعميم']},
+        {id:'independence',title:'الاستقلال والتعميم — متابعة داخلية',items:['يبدأ مهامًا مألوفة باستقلال','يطلب المساعدة بطريقة مناسبة','ينقل الروتين إلى بيئات أخرى','يقل اعتمادُه على المساعدة البشرية المباشرة']}
       ]
     },
     {
-      id:'pecsProgram',mode:'program',title:'متابعة تطبيق PECS®',age:'لمن يحتاج وسيلة تواصل وظيفية مناسبة',duration:'متابعة مستمرة',direction:'skill',
-      sourceTitle:'Pyramid Educational Consultants — PECS',sourceUrl:'https://pecs.com/',
-      description:'متابعة أداء عامة لاستخدام PECS في التواصل الوظيفي. لا تتضمن تعليمات المراحل أو مواد التدريب الرسمية.',
+      id:'pecsProgram',mode:'program',title:'PECS® — Picture Exchange Communication System: متابعة المراحل الست',
+      age:'يستخدم وفق احتياج التواصل وليس لعمر محدد',duration:'تقدم مرحلي مع تعميم مستمر',direction:'skill',
+      description:'متابعة منظمة على المراحل الست المنشورة رسميًا من Pyramid، مع Language Expansion بعد بناء الجملة. لا تحتوي على بروتوكول التدريب التفصيلي أو مواد PECS المحمية.',
+      facts:[
+        ['الهدف','تعليم التواصل الوظيفي بالمبادرة باستخدام تبادل الصور'],['المراحل','ست مراحل متتابعة منشورة رسميًا'],
+        ['التوسع اللغوي','Attributes & Language Expansion بعد تعلم بنية الجملة'],['التعميم','المسافة، الإصرار، الأشخاص والأماكن جزء جوهري من الاستخدام الوظيفي']
+      ],
+      sources:[{title:'Pyramid Educational Consultants — official PECS six phases',url:'https://pecsusa.com/pecs/'}],
       sections:[
-        {id:'initiation',title:'المبادرة والطلب',items:['يبادر بمحاولة تواصل بدل انتظار السؤال','يوجه الرسالة لشريك تواصل واضح','يثابر لإيصال الرسالة عند وجود مسافة أو انشغال','تزداد استقلاليته في بدء التواصل']},
-        {id:'discrimination',title:'اختيار الرمز المناسب',items:['يميز بين رموز لاحتياجات مختلفة','يختار رمزًا يطابق ما يريده','يتحقق الشريك من مطابقة الاختيار عند الحاجة','يستخدم الرموز عبر مواد وأشخاص متنوعين']},
-        {id:'message',title:'بناء الرسالة وتوسيع الوظائف',items:['يبني رسالة أطول عندما يكون ذلك مناسبًا لمستواه','يستجيب لأسئلة تواصلية مألوفة بوسيلته','يستخدم النظام للتعليق وليس الطلب فقط','يستخدم مفردات/رموزًا جديدة بصورة وظيفية']},
-        {id:'generalization',title:'التعميم والاستقلال',items:['يستخدم وسيلة التواصل مع أكثر من شخص','يستخدمها في أكثر من مكان','تتوفر وسيلة التواصل وقت الحاجة','يقل اعتمادُه على التلقين المباشر مع الوقت']}
+        {id:'phase1',title:'Phase I — How to Communicate',items:['يبادر بتبادل صورة مقابل شيء/نشاط مرغوب','يوجه التبادل لشريك تواصل','تقل حاجته للمساعدة لبدء التبادل']},
+        {id:'phase2',title:'Phase II — Distance and Persistence',items:['يبحث عن وسيلة التواصل عند الحاجة','يتحرك نحو شريك التواصل عبر مسافة','يثابر في إيصال الرسالة','يعمم الطلب مع أشخاص وأماكن مختلفة']},
+        {id:'phase3',title:'Phase III — Picture Discrimination',items:['يميز بين صورتين أو أكثر','يختار الصورة المطابقة لما يريده','يزداد دقة الاختيار مع زيادة البدائل','يستخدم كتاب/لوحة التواصل بصورة منظمة']},
+        {id:'phase4',title:'Phase IV — Sentence Structure + Language Expansion',items:['يبني رسالة/جملة باستخدام شريط الجملة','يستخدم رمز بداية الجملة المناسب','يضيف مفردات جديدة تدريجيًا','يتوسع في الصفات/الأفعال/حروف الجر حسب القدرة']},
+        {id:'phase5',title:'Phase V — Responsive Requesting',items:['يجيب باستخدام PECS عندما يُسأل عما يريد','يحافظ على المبادرة بالطلب دون انتظار السؤال','يستخدم الطلب في سياقات متنوعة']},
+        {id:'phase6',title:'Phase VI — Commenting',items:['يستخدم النظام للتعليق لا للطلب فقط','يجيب عن أسئلة تعليق مناسبة','يبادر بتعليقات وظيفية في مواقف طبيعية','يزداد تنوع الرسائل الاجتماعية']}
       ]
     }
   );
@@ -402,17 +640,20 @@
   }
   async function testsPage(pid){
     const p=await repo.getPatient(pid);if(!p)return'<div class="card">الحالة غير موجودة.</div>';
-    const cards=testCatalog.map(t=>`<article class="test-card">${testBadge(t)}<h3>${e(t.title)}</h3><p>${e(t.description)}</p><div class="test-meta"><span class="pill">${e(t.age)}</span><span class="pill">${e(t.duration)}</span><span class="pill">${e(testCountLabel(t))}</span></div>${t.sourceUrl?`<a class="source-link" href="${e(t.sourceUrl)}" target="_blank" rel="noreferrer">المصدر/الناشر: ${e(t.sourceTitle)}</a>`:''}<a class="button primary" href="#/patients/${e(pid)}/tests/${e(t.id)}/new">${t.mode==='licensed'?'تسجيل نتيجة':'بدء المتابعة'}</a></article>`).join('');
-    return `<div class="card"><div class="card-title-row"><div><h2>اختبارات ومسوح وبرامج ${e(p.fullName)}</h2><p style="color:var(--muted)">توجد مسوح ASHA داخلية، وقوالب تسجيل لنتائج أدوات معيارية مرخّصة، وقوائم متابعة للبرامج العلاجية.</p></div><a class="button secondary" href="#/patients/${e(pid)}">عودة للملف</a></div><div class="test-warning"><strong>تنبيه مهني وحقوقي:</strong> الأدوات المعيارية/التجارية لا تُنسخ بنودها داخل النظام. القوالب الذهبية مخصصة لإدخال النتائج الناتجة من النسخة القانونية التي لدى الأخصائية. قوائم البرامج البنفسجية هي متابعات داخلية وليست البروتوكولات الرسمية.</div></div><div class="test-grid">${cards}</div>`
+    const cards=testCatalog.map(t=>`<article class="test-card">${testBadge(t)}<h3>${e(t.title)}</h3><p>${e(t.description)}</p><div class="test-meta"><span class="pill">${e(t.age)}</span><span class="pill">${e(t.duration)}</span><span class="pill">${e(testCountLabel(t))}</span></div>${(t.sources||[]).slice(0,1).map(x=>`<a class="source-link" href="${e(x.url)}" target="_blank" rel="noreferrer">المصدر: ${e(x.title)}</a>`).join('')|| (t.sourceUrl?`<a class="source-link" href="${e(t.sourceUrl)}" target="_blank" rel="noreferrer">المصدر/الناشر: ${e(t.sourceTitle)}</a>`:'')}<a class="button primary" href="#/patients/${e(pid)}/tests/${e(t.id)}/new">${t.mode==='licensed'?'فتح ملف النتائج':'بدء المتابعة'}</a></article>`).join('');
+    return `<div class="card"><div class="card-title-row"><div><h2>اختبارات ومسوح وبرامج ${e(p.fullName)}</h2><p style="color:var(--muted)">توجد مسوح ASHA داخلية، ووحدات نتائج مفصلة للأدوات المعيارية المرخّصة، وقوائم متابعة للبرامج العلاجية مبنية على البنية المنشورة رسميًا.</p></div><a class="button secondary" href="#/patients/${e(pid)}">عودة للملف</a></div><div class="test-warning"><strong>تنبيه مهني وحقوقي:</strong> الأدوات المعيارية/التجارية لا تُنسخ بنودها داخل النظام. الوحدات الذهبية تمثل البنية والمجالات والمخرجات المنشورة للأداة وتستقبل درجات النسخة القانونية التي لدى الأخصائية، لكنها لا تنسخ البنود أو جداول التحويل المحمية. قوائم البرامج البنفسجية تمثل بنية متابعة مهنية وليست البروتوكولات التدريبية الأصلية.</div></div><div class="test-grid">${cards}</div>`
   }
   function getTestDraft(pid,testId){const key=`test:${pid}:${testId}`;return state.drafts[key]||(state.drafts[key]={section:0,responses:{},notes:{assessmentDate:today(),examiner:state.user?.displayName||state.user?.email||'',clinicalNotes:'',recommendations:''}})}
+  function testSourcesHtml(test){const src=test.sources?.length?test.sources:(test.sourceUrl?[{title:test.sourceTitle,url:test.sourceUrl}]:[]);return src.length?`<div class="source-note"><strong>المصادر المستخدمة لبناء الوحدة:</strong><ul style="margin:8px 0 0">${src.map(x=>`<li><a href="${e(x.url)}" target="_blank" rel="noreferrer">${e(x.title)}</a></li>`).join('')}</ul></div>`:''}
+  function testFactsHtml(test){return test.facts?.length?`<div class="card" style="margin-top:14px"><h3>البنية المهنية للأداة</h3><div class="table-wrap"><table><tbody>${test.facts.map(([k,v])=>`<tr><td style="width:28%;font-weight:800">${e(k)}</td><td>${e(v)}</td></tr>`).join('')}</tbody></table></div></div>`:''}
+  function licensedFieldControl(f,val){const common=`name="${e(f.id)}" ${f.readonly?'readonly':''}`;if(f.type==='textarea')return`<textarea ${common} placeholder="${e(f.placeholder||'')}">${e(val||'')}</textarea>`;if(f.type==='select')return`<select ${common}><option value="">اختر</option>${(f.options||[]).map(o=>`<option ${String(val||'')===String(o)?'selected':''}>${e(o)}</option>`).join('')}</select>`;const type=f.type==='number'?'number':(f.type==='date'?'date':'text');return`<input ${common} type="${type}" value="${e(val||'')}" ${f.min!=null?`min="${e(f.min)}"`:''} ${f.max!=null?`max="${e(f.max)}"`:''} ${f.step!=null?`step="${e(f.step)}"`:''} placeholder="${e(f.placeholder||'')}">`}
   async function licensedTestRunPage(pid,p,test){
-    const d=getTestDraft(pid,test.id);const n=d.notes||{};
-    const fields=(test.fields||[]).map(f=>`<label>${e(f.label)}${f.type==='textarea'?`<textarea name="${e(f.id)}">${e(n[f.id]||'')}</textarea>`:`<input name="${e(f.id)}" value="${e(n[f.id]||'')}">`}${f.help?`<span class="field-help">${e(f.help)}</span>`:''}</label>`).join('');
-    return `<div class="card"><div class="card-title-row"><div>${testBadge(test)}<span class="eyebrow" style="display:block;margin-top:8px">${e(test.age)} • ${e(test.duration)}</span><h2>${e(test.title)}</h2><p style="color:var(--muted);margin:4px 0">الحالة: ${e(p.fullName)} — ${e(p.ageText||'')}</p></div><a class="button secondary" href="#/patients/${e(pid)}/tests">تغيير الأداة</a></div><div class="licensed-form-note"><strong>هذا ليس نسخة إلكترونية من الاختبار.</strong><br>${e(test.licenseNote||'أدخل النتائج من النسخة المرخّصة التي لدى الأخصائية.')}</div>${test.sourceUrl?`<p class="source-note">الناشر/المرجع: <a href="${e(test.sourceUrl)}" target="_blank" rel="noreferrer">${e(test.sourceTitle)}</a></p>`:''}</div>
-    <form id="licensedAssessmentForm" class="card"><h3>بيانات التطبيق والنتائج</h3><div class="form-grid two"><label>تاريخ التطبيق<input name="assessmentDate" type="date" value="${e(n.assessmentDate||today())}"></label><label>اسم الفاحص<input name="examiner" value="${e(n.examiner||state.user?.displayName||state.user?.email||'')}"></label>${fields}</div><label>الملاحظات السريرية<textarea name="clinicalNotes">${e(n.clinicalNotes||'')}</textarea></label><label>التوصيات والخطوة التالية<textarea name="recommendations">${e(n.recommendations||'')}</textarea></label><div class="actions"><button id="saveLicensedDraft" class="secondary" type="button">حفظ كمسودة</button><button id="finishLicensed" class="primary" type="button">اعتماد وإنشاء التقرير</button></div></form>`
+    const d=getTestDraft(pid,test.id);const n=d.notes||{};let lastGroup='';
+    const fields=(test.fields||[]).map(f=>{const group=f.group&&f.group!==lastGroup?`<h4 class="full-span" style="margin:18px 0 0;padding-top:12px;border-top:1px solid var(--line)">${e(f.group)}</h4>`:'';lastGroup=f.group||lastGroup;return`${group}<label>${e(f.label)}${licensedFieldControl(f,n[f.id]||'')}${f.help?`<span class="field-help">${e(f.help)}</span>`:''}</label>`}).join('');
+    return `<div class="card"><div class="card-title-row"><div>${testBadge(test)}<span class="eyebrow" style="display:block;margin-top:8px">${e(test.age)} • ${e(test.duration)}</span><h2>${e(test.title)}</h2><p style="color:var(--muted);margin:4px 0">الحالة: ${e(p.fullName)} — ${e(p.ageText||'')}</p></div><a class="button secondary" href="#/patients/${e(pid)}/tests">تغيير الأداة</a></div><div class="licensed-form-note"><strong>وحدة تسجيل نتائج وليست بديلًا عن النسخة الأصلية.</strong><br>${e(test.licenseNote||'أدخل النتائج من النسخة المرخّصة التي لدى الأخصائية.')}</div>${testSourcesHtml(test)}</div>${testFactsHtml(test)}
+    <form id="licensedAssessmentForm" class="card"><h3>بيانات التطبيق والنتائج</h3><div class="form-grid two"><label>تاريخ التطبيق<input name="assessmentDate" type="date" value="${e(n.assessmentDate||today())}"></label><label>اسم الفاحص<input name="examiner" value="${e(n.examiner||state.user?.displayName||state.user?.email||'')}"></label>${fields}</div>${(test.calculations||[]).map(c=>`<div class="notice calc-result" data-calc-prefix="${e(c.sumPrefix||'')}"><strong>${e(c.label)}:</strong> <span>—</span></div>`).join('')}<label>الملاحظات السريرية<textarea name="clinicalNotes">${e(n.clinicalNotes||'')}</textarea></label><label>التوصيات والخطوة التالية<textarea name="recommendations">${e(n.recommendations||'')}</textarea></label><div class="actions"><button id="saveLicensedDraft" class="secondary" type="button">حفظ كمسودة</button><button id="finishLicensed" class="primary" type="button">اعتماد وإنشاء التقرير</button></div></form>`
   }
-  async function testRunPage(pid,testId){const p=await repo.getPatient(pid),test=findTest(testId);if(!p||!test)return'<div class="card">الاختبار غير موجود.</div>';if(test.mode==='licensed')return licensedTestRunPage(pid,p,test);const d=getTestDraft(pid,testId),sec=test.sections[d.section],score=scoreTest(test,d.responses),scale=answerScales[test.direction];return `<div class="card"><div class="card-title-row"><div><span class="eyebrow">${e(test.age)} • ${e(test.duration)}</span><h2>${e(test.title)}</h2><p style="color:var(--muted);margin:4px 0">الحالة: ${e(p.fullName)} — ${e(p.ageText||'')}</p></div><a class="button secondary" href="#/patients/${e(pid)}/tests">تغيير الاختبار</a></div><div class="test-warning">${test.mode==='program'?'قيّم مستوى الأداء الحالي في عناصر المتابعة. هذه القائمة تنظيمية داخلية وليست البروتوكول الرسمي للبرنامج.':'اختر الإجابة التي تصف الأداء في أغلب المواقف. '+(test.asha?'هذه قائمة مسح أصلية متوافقة مع مجالات ASHA وليست أداة معيارية رسمية من ASHA. ':'')+'النتيجة للمساعدة في تنظيم التقييم وليست تشخيصًا مستقلًا.'}</div>${test.sourceUrl?`<p class="source-note">المرجع المهني للمجالات: <a href="${e(test.sourceUrl)}" target="_blank" rel="noreferrer">${e(test.sourceTitle)}</a></p>`:''}</div>
+  async function testRunPage(pid,testId){const p=await repo.getPatient(pid),test=findTest(testId);if(!p||!test)return'<div class="card">الاختبار غير موجود.</div>';if(test.mode==='licensed')return licensedTestRunPage(pid,p,test);const d=getTestDraft(pid,testId),sec=test.sections[d.section],score=scoreTest(test,d.responses),scale=answerScales[test.direction];return `<div class="card"><div class="card-title-row"><div><span class="eyebrow">${e(test.age)} • ${e(test.duration)}</span><h2>${e(test.title)}</h2><p style="color:var(--muted);margin:4px 0">الحالة: ${e(p.fullName)} — ${e(p.ageText||'')}</p></div><a class="button secondary" href="#/patients/${e(pid)}/tests">تغيير الاختبار</a></div><div class="test-warning">${test.mode==='program'?'قيّم مستوى الأداء الحالي في عناصر المتابعة. هذه القائمة تنظيمية داخلية وليست البروتوكول الرسمي للبرنامج.':'اختر الإجابة التي تصف الأداء في أغلب المواقف. '+(test.asha?'هذه قائمة مسح أصلية متوافقة مع مجالات ASHA وليست أداة معيارية رسمية من ASHA. ':'')+'النتيجة للمساعدة في تنظيم التقييم وليست تشخيصًا مستقلًا.'}</div>${testSourcesHtml(test)}</div>${testFactsHtml(test)}
     <div class="assessment-layout"><div class="card assessment-main"><div class="wizard-head"><div><span class="eyebrow">قسم ${d.section+1} من ${test.sections.length}</span><h2>${e(sec.title)}</h2></div><strong>${score.answered}/${score.totalItems}</strong></div><div class="progress wizard"><div style="width:${((d.section+1)/test.sections.length)*100}%"></div></div><div class="scale-legend">${scale.map(x=>`<span><strong>${x.v}</strong><br>${e(x.l)}</span>`).join('')}</div>${sec.items.map((label,i)=>{const val=d.responses?.[sec.id]?.[i];return`<div class="question-box"><div class="question-title"><span>${i+1}</span><div>${e(label)}</div></div><div class="choice-row">${scale.map(opt=>`<button type="button" class="choice-btn ${val===opt.v?'selected':''}" data-test-rate="${opt.v}" data-section="${sec.id}" data-index="${i}"><strong>${opt.v}</strong>${e(opt.l)}</button>`).join('')}</div></div>`}).join('')}<label>ملاحظات هذا القسم<textarea id="testSectionNotes">${e(d.notes[sec.id+'Notes']||'')}</textarea></label><div class="wizard-actions no-print"><button id="testPrev" class="secondary" type="button" ${d.section===0?'disabled':''}>السابق</button>${d.section<test.sections.length-1?'<button id="testNext" class="primary" type="button">التالي</button>':'<button id="testSummaryBtn" class="primary" type="button">إظهار النتيجة</button>'}</div></div>
     <aside class="card score-side"><h3>التقدم</h3>${test.sections.map(x=>{const z=score.domains[x.id];const show=z.percent==null?'—':(test.direction==='risk'?100-z.percent:z.percent)+'%';return`<div class="score-card"><div class="score-head"><span>${e(x.title)}</span><strong>${show}</strong></div><div class="progress"><div style="width:${z.percent==null?0:(test.direction==='risk'?100-z.percent:z.percent)}%"></div></div><small>${z.answered}/${z.totalItems} بنود</small></div>`}).join('')}</aside>
     <div class="card full-span" id="testSummary"><h2>النتيجة والتوصيات</h2><div class="result-hero"><div class="score-ring" style="--p:${score.performance||0}"><strong>${score.performance??'—'}${score.performance!=null?'%':''}</strong></div><div><h3>${e(testInterpret(test,score))}</h3><p class="answer-count">تمت الإجابة عن ${score.answered} من ${score.totalItems} بند.</p><div class="test-warning">${test.mode==='program'?'هذه النسبة مؤشر تقدم داخلي لعناصر البرنامج المختارة وليست درجة معيارية أو شهادة إتقان للبروتوكول الرسمي.':'لا تُستخدم هذه النتيجة وحدها لإثبات أو نفي تشخيص. تُفسر مع التاريخ النمائي، الملاحظة، العينة اللغوية/الكلامية، فحص السمع وأي اختبارات معيارية مرخصة مناسبة.'}</div></div></div><div class="form-grid two" style="margin-top:18px"><label>تاريخ التطبيق<input id="testDate" type="date" value="${e(d.notes.assessmentDate)}"></label><label>اسم الفاحص<input id="testExaminer" value="${e(d.notes.examiner||'')}"></label></div><label>الملاحظات السريرية<textarea id="testClinicalNotes">${e(d.notes.clinicalNotes||'')}</textarea></label><label>التوصيات / الخطوة التالية<textarea id="testRecommendations">${e(d.notes.recommendations||'')}</textarea></label><div class="actions"><button id="saveTestDraft" class="secondary" type="button">حفظ كمسودة</button><button id="finishTest" class="primary" type="button" ${score.answered<score.totalItems?'disabled':''}>اعتماد الاختبار وإنشاء التقرير</button></div></div></div>`}
@@ -421,7 +662,7 @@
   async function sessionPage(pid){return `<form id="sessionForm" class="card"><h2>تسجيل جلسة علاجية</h2><div class="form-grid three"><label>التاريخ<input name="date" type="date" value="${today()}"></label><label>المدة بالدقائق<input name="durationMinutes" type="number" min="10" max="180" value="45"></label><label>الحضور<select name="attendance"><option>حضر</option><option>اعتذر</option><option>غاب</option></select></label></div><label>الأهداف التي تم العمل عليها<textarea name="goalsWorked"></textarea></label><label>الأنشطة والاستراتيجيات المستخدمة<textarea name="activities"></textarea></label><label>الأداء والاستجابة ونسبة النجاح<textarea name="performance" placeholder="مثال: حقق 8/10 محاولات بمساعدة لفظية بسيطة..."></textarea></label><label>واجب منزلي / تدريب الأسرة<textarea name="homeProgram"></textarea></label><label>خطة الجلسة القادمة<textarea name="nextPlan"></textarea></label><div class="actions"><button class="primary">حفظ الجلسة</button></div></form>`}
   async function reportPage(pid,aid){const[p,a]=await Promise.all([repo.getPatient(pid),repo.getAssessment(pid,aid)]);if(!p||!a)return'<div class="card">تعذر العثور على التقرير.</div>';
     if(a.type==='licensed-assessment-record'){
-      const test=findTest(a.testId);if(!test)return'<div class="card">تعذر العثور على تعريف الأداة.</div>';const rows=(test.fields||[]).map(f=>`<tr><td>${e(f.label)}</td><td style="white-space:pre-wrap">${e(a.licensedData?.[f.id]||'—')}</td></tr>`).join('');
+      const test=findTest(a.testId);if(!test)return'<div class="card">تعذر العثور على تعريف الأداة.</div>';let g='';const rows=(test.fields||[]).map(f=>{const head=f.group&&f.group!==g?`<tr><th colspan="2" style="text-align:right;background:#f7f8fb">${e(f.group)}</th></tr>`:'';g=f.group||g;return`${head}<tr><td>${e(f.label)}</td><td style="white-space:pre-wrap">${e(a.licensedData?.[f.id]||'—')}</td></tr>`}).join('');
       return `<div class="report-actions no-print"><a class="button secondary" href="#/patients/${e(pid)}">عودة للملف</a><button id="printReport" class="secondary">طباعة / حفظ PDF</button><button id="shareReport" class="primary">مشاركة التقرير</button></div><article class="report" id="report"><header class="report-header"><div><h1>${e(state.clinicName)}</h1><p>${e(test.title)}</p></div><div class="report-code">#${e(a.id.slice(-8))}</div></header><section class="report-section"><h2>البيانات الأساسية</h2><div class="report-grid"><p><strong>اسم الطفل:</strong> ${e(p.fullName)}</p><p><strong>العمر:</strong> ${e(p.ageText||'—')}</p><p><strong>تاريخ الميلاد:</strong> ${e(p.dob||'—')}</p><p><strong>ولي الأمر:</strong> ${e(p.guardianName||'—')}</p><p><strong>تاريخ التطبيق:</strong> ${e(fmtDate(a.assessmentDate))}</p><p><strong>الفاحص:</strong> ${e(a.examiner||'—')}</p></div></section><section class="report-section"><h2>النتائج المنقولة من البروتوكول المرخّص</h2><table class="report-table"><tbody>${rows}</tbody></table></section><section class="report-section"><h2>الملاحظات والتوصيات</h2>${reportBlock('الملاحظات السريرية',a.clinicalNotes)}${reportBlock('التوصيات / الخطوة التالية',a.recommendations)}</section><footer class="report-footer"><p>هذا التقرير يوثق نتائج أدخلتها الأخصائية من النسخة الأصلية/المرخّصة للأداة. النظام لا يحتوي على بنود الاختبار ولا يقوم بتصحيح معياري بديل عن الدليل الرسمي.</p><div><span>توقيع الأخصائية: ____________________</span><span>التاريخ: ____________________</span></div></footer></article>`
     }
     if(a.type==='screening-test'||a.type==='program-tracker'){
@@ -463,6 +704,8 @@
       const pid=m[1],testId=m[2],d=getTestDraft(pid,testId),test=findTest(testId);
       if(test?.mode==='licensed'){
         const saveLicensed=async final=>{const form=document.getElementById('licensedAssessmentForm');if(!form)return;const data=objectFromForm(form);const licensedData={};(test.fields||[]).forEach(f=>licensedData[f.id]=data[f.id]||'');const payload={status:final?'final':'draft',type:'licensed-assessment-record',testId:test.id,testTitle:test.title,assessmentDate:data.assessmentDate||today(),examiner:data.examiner||'',clinicalNotes:data.clinicalNotes||'',recommendations:data.recommendations||'',licensedData};try{const id=await repo.saveAssessment(pid,payload);delete state.drafts[`test:${pid}:${testId}`];location.hash=final?`#/patients/${pid}/assessment/${id}/report`:`#/patients/${pid}`}catch(err){toast(err.message||'تعذر حفظ النتيجة','error')}};
+        const refreshLicensedCalcs=()=>{document.querySelectorAll('.calc-result').forEach(box=>{const prefix=box.dataset.calcPrefix||'';let sum=0,count=0;form.querySelectorAll(`[name^="${prefix}"]`).forEach(el=>{const v=parseFloat(el.value);if(Number.isFinite(v)){sum+=v;count++}});box.querySelector('span').textContent=count?String(Math.round(sum*100)/100):'—'})};
+        const form=document.getElementById('licensedAssessmentForm');form?.addEventListener('input',refreshLicensedCalcs);refreshLicensedCalcs();
         document.getElementById('saveLicensedDraft')?.addEventListener('click',()=>saveLicensed(false));
         document.getElementById('finishLicensed')?.addEventListener('click',()=>saveLicensed(true));
       }else{
