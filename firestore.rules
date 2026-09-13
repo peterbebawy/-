@@ -1,0 +1,51 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+    function memberDoc(clinicId) {
+      return /databases/$(database)/documents/clinics/$(clinicId)/members/$(request.auth.uid);
+    }
+    function isMember(clinicId) {
+      return signedIn() && exists(memberDoc(clinicId));
+    }
+    function isAdmin(clinicId) {
+      return isMember(clinicId) && get(memberDoc(clinicId)).data.role == 'admin';
+    }
+
+    match /clinics/{clinicId} {
+      allow read: if isMember(clinicId);
+      allow create, update, delete: if isAdmin(clinicId);
+
+      match /members/{uid} {
+        allow read: if isMember(clinicId);
+        allow create, update, delete: if isAdmin(clinicId);
+      }
+
+      match /patients/{patientId} {
+        allow read: if isMember(clinicId);
+        allow create: if isMember(clinicId) && request.resource.data.createdBy == request.auth.uid;
+        allow update: if isMember(clinicId);
+        allow delete: if isAdmin(clinicId);
+
+        match /{document=**} {
+          allow read: if isMember(clinicId);
+          allow create, update: if isMember(clinicId);
+          allow delete: if isAdmin(clinicId);
+        }
+      }
+
+      match /settings/{docId} {
+        allow read: if isMember(clinicId);
+        allow write: if isAdmin(clinicId);
+      }
+
+      match /auditLogs/{logId} {
+        allow read: if isAdmin(clinicId);
+        allow create: if isMember(clinicId);
+        allow update, delete: if false;
+      }
+    }
+  }
+}
